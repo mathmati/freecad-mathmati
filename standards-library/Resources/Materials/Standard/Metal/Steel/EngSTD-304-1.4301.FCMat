@@ -1,11 +1,11 @@
 ---
 # SPDX-License-Identifier: CC-BY-4.0
-# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# mathmati -- FreeCAD Engineering Standards Library (M2)
 # Values cross-checked against >=2 independent public sources -- see
 # ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
 General:
   UUID: "67f4fa36-a0ec-4c67-b855-79b568b7317e"
-  Author: "FableMax oss-unlock unit"
+  Author: "mathmati"
   License: "CC-BY-4.0"
   Name: "304 Stainless Steel (X5CrNi18-10)"
   Description: "Austenitic stainless steel, 18Cr-8Ni (values match FreeCAD's own shipped X5CrNi18-10.FCMat card, cross-checked against ASTM A240)"

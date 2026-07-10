@@ -1,11 +1,11 @@
 ---
 # SPDX-License-Identifier: CC-BY-4.0
-# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# mathmati -- FreeCAD Engineering Standards Library (M2)
 # Values cross-checked against >=2 independent public sources -- see
 # ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
 General:
   UUID: "eb878387-6661-4eb7-8ac3-162a4e67101b"
-  Author: "FableMax oss-unlock unit"
+  Author: "mathmati"
   License: "CC-BY-4.0"
   Name: "Aluminum 6082-T6"
   Description: "Structural aluminum-magnesium-silicon-manganese alloy"

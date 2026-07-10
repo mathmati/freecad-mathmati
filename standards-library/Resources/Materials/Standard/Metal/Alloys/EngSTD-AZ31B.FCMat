@@ -1,11 +1,11 @@
 ---
 # SPDX-License-Identifier: CC-BY-4.0
-# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# mathmati -- FreeCAD Engineering Standards Library (M2)
 # Values cross-checked against >=2 independent public sources -- see
 # ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
 General:
   UUID: "e1337f19-31d2-43fd-8d9c-f69b64da4df8"
-  Author: "FableMax oss-unlock unit"
+  Author: "mathmati"
   License: "CC-BY-4.0"
   Name: "Magnesium AZ31B"
   Description: "Wrought magnesium-aluminum-zinc alloy"

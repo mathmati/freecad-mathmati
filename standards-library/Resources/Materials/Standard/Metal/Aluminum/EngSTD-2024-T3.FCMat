@@ -1,11 +1,11 @@
 ---
 # SPDX-License-Identifier: CC-BY-4.0
-# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# mathmati -- FreeCAD Engineering Standards Library (M2)
 # Values cross-checked against >=2 independent public sources -- see
 # ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
 General:
   UUID: "335bd249-d532-415e-9ba7-d1f10ceb6886"
-  Author: "FableMax oss-unlock unit"
+  Author: "mathmati"
   License: "CC-BY-4.0"
   Name: "Aluminum 2024-T3"
   Description: "Aerospace-grade aluminum-copper alloy, solution heat treated and cold worked"

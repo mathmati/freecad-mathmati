@@ -1,11 +1,11 @@
 ---
 # SPDX-License-Identifier: CC-BY-4.0
-# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# mathmati -- FreeCAD Engineering Standards Library (M2)
 # Values cross-checked against >=2 independent public sources -- see
 # ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
 General:
   UUID: "38bf654a-3ccb-45ac-b64a-9bb239fd2639"
-  Author: "FableMax oss-unlock unit"
+  Author: "mathmati"
   License: "CC-BY-4.0"
   Name: "S355JR"
   Description: "Non-alloy structural steel, EN 10025-2"

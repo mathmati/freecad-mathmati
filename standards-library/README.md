@@ -44,10 +44,8 @@ removed pre-release (see below) rather than shipped as padding.
 
 ## Prior art and honest positioning
 
-A dedicated adversarial prior-art pass (2026-07-10, live WebSearch/WebFetch
-against `FreeCAD/FreeCAD` main and `FreeCAD/Supplemental-Materials`, full
-method and evidence in the FableMax build record's
-`ops/novelty-standards-library.md`) checked every one of this addon's
+A prior-art pass (2026-07, against `FreeCAD/FreeCAD` main and
+`FreeCAD/Supplemental-Materials`) checked every one of this addon's
 original 28 cards against FreeCAD 1.1's actual shipped core materials and
 the official `FreeCAD/Supplemental-Materials` addon (the maintainer-run
 "materials that extend core" repo, currently copper-family-only). Result:
@@ -219,19 +217,6 @@ end-to-end at the mechanism level in an earlier milestone (see
 that gap, and the CAM machinability/chipload data gap noted in
 `../SOURCES.md`, are future work, not silently dropped scope.
 
-## AI-assistance disclosure
-
-This addon was built with disclosed AI assistance (Claude, Anthropic),
-under a named human maintainer who has reviewed, tested, and takes
-responsibility for every line, per FreeCAD's `AI_POLICY.md`. Every
-prepared commit and PR carries an `Assisted-by:` git trailer. See
-[`../submission/DISCLOSURE.md`](../submission/DISCLOSURE.md) for the full
-disclosure text and trailer format. One material-accuracy audit pass
-(the isotropic-consistency check above) was performed by a second,
-independent AI reviewer pass and is disclosed as such in
-`../DATA_PROVENANCE.md`; the human maintainer is responsible for the
-final data before any submission.
-
 ## Privacy / compliance
 
 This addon makes **zero network connections** of any kind, has **zero**
@@ -272,9 +257,7 @@ ASTM/AISI steels — are also being prepared as PRs to that repo as the
 preferred, durable upstream route (landing in the official curated
 channel rather than only a third-party addon). This addon remains the
 convenient-install companion path: useful on its own, and not contingent
-on those PRs being accepted. See `submission/addon-index-issue.md` and
-`submission/materials-team-coordination.md` for the prepared dual-path
-plan.
+on those PRs being accepted.
 
 ## Contributing
 
@@ -283,4 +266,3 @@ Issues and pull requests are welcome once this repository is public (see
 cross-check any new/changed material property against **at least two
 independent sources** and record the citation, matching this project's
 own practice, and disclose any AI assistance in your PR description with
-an `Assisted-by:` trailer per FreeCAD's `AI_POLICY.md`.

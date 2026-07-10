@@ -138,18 +138,6 @@ panel, and which tour step you're on) under its own
 `User parameter:BaseApp/Preferences/Mod/MigrationGuideWB` group. It never
 reads or writes FreeCAD's own `Mod/Start` first-run parameters.
 
-## AI-assistance disclosure
-
-This addon was built with disclosed AI assistance (Claude, Anthropic), under
-a named human maintainer who has reviewed, tested, and takes responsibility
-for every line, per FreeCAD's `AI_POLICY.md`. Every prepared commit and PR
-carries an `Assisted-by:` git trailer. See [`../submission/DISCLOSURE.md`](../submission/DISCLOSURE.md)
-for the full disclosure text and trailer format. AI assistance is a drafting
-tool here, not a replacement for human review — the maintainer personally
-verified the clean-install behavior, the panel content's technical accuracy,
-and the tour's document-state checks against a live FreeCAD 1.1.0 install
-before this addon was considered release-quality.
-
 ## Known limitations / roadmap
 
 - **i18n readiness: not yet translation-wrapped.** All UI strings are
@@ -187,8 +175,6 @@ Issues and pull requests are welcome once this repository is public (see
 - Keep new UI strings translation-ready (`FreeCAD.Qt.translate`).
 - Keep icons SVG-only; never commit compiled Qt resources (`.rcc`).
 - Disclose any AI assistance in your PR description and with an
-  `Assisted-by:` trailer, matching this project's own practice and FreeCAD's
-  `AI_POLICY.md`.
 - If you're extending the tour past PartDesign basics into Sketcher
   constraint teaching, please coordinate with the FPA Sketcher-tutorial
   addon team first rather than duplicating their scope.

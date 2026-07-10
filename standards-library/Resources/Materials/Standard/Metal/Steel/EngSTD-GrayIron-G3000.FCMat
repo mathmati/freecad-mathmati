@@ -1,11 +1,11 @@
 ---
 # SPDX-License-Identifier: CC-BY-4.0
-# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# mathmati -- FreeCAD Engineering Standards Library (M2)
 # Values cross-checked against >=2 independent public sources -- see
 # ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
 General:
   UUID: "2a5fd3fa-dd7e-4b8b-aa3e-fcf05ad83902"
-  Author: "FableMax oss-unlock unit"
+  Author: "mathmati"
   License: "CC-BY-4.0"
   Name: "Gray Cast Iron G3000 (Class 30)"
   Description: "Gray cast iron, ASTM A48 Class 30 / SAE G3000 (no well-defined yield point; value is an approximate proof stress)"
