@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>AIRender</name>
+  <description>Stylized AI image rendering for FreeCAD: capture the active 3D viewport (color + a geometry-faithful line-art control image), send it as img2img/ControlNet-style input to a BYO-key image model -- a local ComfyUI endpoint by default (zero cost, no account), or Stability AI / OpenAI with your own API key -- and save the styled result next to your document. Complements the unmaintained Render workbench: fast/stylized instead of slow/physically-accurate. No bundled billing, no bundled models -- you bring the provider.</description>
+  <version>0.1.0</version>
+  <date>2026-07-10</date>
+  <maintainer email="177616452+mathmati@users.noreply.github.com">mathmati</maintainer>
+  <license file="LICENSE-Code">MIT</license>
+  <url type="repository" branch="main">https://github.com/mathmati/FreeCAD-AIRender</url>
+  <url type="readme">https://github.com/mathmati/FreeCAD-AIRender/raw/main/README.md</url>
+  <url type="bugtracker">https://github.com/mathmati/FreeCAD-AIRender/issues</url>
+  <icon>Resources/Icons/airender.svg</icon>
+  <freecadmin>1.1.0</freecadmin>
+  <pythonmin>3.9</pythonmin>
+  <content>
+    <workbench>
+      <classname>AIRenderWorkbench</classname>
+      <icon>Resources/Icons/airender.svg</icon>
+    </workbench>
+  </content>
+  <tag>rendering</tag>
+  <tag>ai</tag>
+  <tag>image-generation</tag>
+  <tag>stable-diffusion</tag>
+  <tag>comfyui</tag>
+  <tag>visualization</tag>
+</package>

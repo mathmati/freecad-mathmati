@@ -13,6 +13,7 @@ Manager.
 | **[standards-library](standards-library/)** | *Equip it.* 21 cross-checked engineering material cards (steels, stainless, aluminium, titanium, copper alloys, cast irons, polymers, magnesium — including AZ31B, not otherwise present in core or the official supplemental materials). Every property is cross-checked against at least two public sources. |
 | **[site-context](site-context/)** | *Build in the real world.* A SketchUp-style "Add Location": place-search or coordinates → OpenStreetMap buildings (with courtyards) extruded at real heights on SRTM terrain. An actively-maintained, FreeCAD-1.x-verified evolution of the earlier GeoData / GeoData2 add-ons, which it credits. |
 | **[push-pull](push-pull/)** | *Model it easily.* SketchUp-style direct modelling: click a face, drag along its normal with a live ghost preview and numeric readout, release to commit a **parametric** PartDesign Pad/Pocket. Type a number for precision. |
+| **[ai-render](ai-render/)** | *Show it off.* Stylized AI rendering of the active 3D view: captures a color image plus a geometry-faithful line-art control image and sends both to a bring-your-own provider (local ComfyUI by default — free, keyless — or Stability AI / OpenAI with your own key). Complements the physically-accurate (and unmaintained) Render workbench with a fast, stylized alternative. |
 
 ## Notes
 
