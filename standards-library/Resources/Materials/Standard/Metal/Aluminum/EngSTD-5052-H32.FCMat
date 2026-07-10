@@ -1,0 +1,35 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "c116eab2-5836-40c0-82c0-ccd234129986"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "Aluminum 5052-H32"
+  Description: "Aluminum-magnesium alloy, strain-hardened and stabilized"
+Inherits:
+  Aluminum:
+    UUID: "d1f317f0-5ffa-4798-8ab3-af2ff0b5182c"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Metal"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Aluminium"
+    MaterialNumber: "A95052"
+    StandardCode: "UNS"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "2680 kg/m^3"
+    PoissonRatio: "0.33"
+    ShearModulus: "25900 MPa"
+    UltimateStrain: "12"
+    UltimateTensileStrength: "230 MPa"
+    YieldStrength: "180 MPa"
+    YoungsModulus: "70300 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.0000235 m/m/K"

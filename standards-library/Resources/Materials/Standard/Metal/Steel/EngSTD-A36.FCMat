@@ -1,0 +1,35 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "79b7b29a-c972-4815-b3e9-28452e470b2d"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "ASTM A36"
+  Description: "Structural carbon steel plate/shape, ASTM A36"
+Inherits:
+  Steel:
+    UUID: "4b849c55-6b3a-4f75-a055-40c0d0324596"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Metal"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Mild steel"
+    MaterialNumber: "K02600"
+    StandardCode: "ASTM A36"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "7850 kg/m^3"
+    PoissonRatio: "0.3"
+    ShearModulus: "76900 MPa"
+    UltimateStrain: "20"
+    UltimateTensileStrength: "400 MPa"
+    YieldStrength: "250 MPa"
+    YoungsModulus: "200000 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.0000117 m/m/K"

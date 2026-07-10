@@ -1,0 +1,31 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "36f9090e-d7bb-4f2a-934c-1fb04622372a"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "Nylon 6/6 (PA66)"
+  Description: "Unfilled, dry-as-molded polyamide 6,6 engineering thermoplastic"
+  SourceURL: "https://en.wikipedia.org/wiki/Nylon_66"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Thermoplast"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Polyamide"
+    MaterialNumber: "PA66"
+    StandardCode: "ISO 1874"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "1140 kg/m^3"
+    PoissonRatio: "0.39"
+    UltimateTensileStrength: "84 MPa"
+    YieldStrength: "83 MPa"
+    YoungsModulus: "3000 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.00008 m/m/K"

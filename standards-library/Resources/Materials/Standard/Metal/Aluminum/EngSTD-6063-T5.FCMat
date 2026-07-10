@@ -1,0 +1,36 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "4c9e499a-6843-46d2-b000-d9662c75562a"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "Aluminum 6063-T5"
+  Description: "Extruded aluminum-magnesium-silicon alloy, artificially aged"
+  SourceURL: "https://en.wikipedia.org/wiki/6063_aluminium_alloy"
+Inherits:
+  Aluminum:
+    UUID: "d1f317f0-5ffa-4798-8ab3-af2ff0b5182c"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Metal"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Aluminium"
+    MaterialNumber: "A96063"
+    StandardCode: "UNS"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "2700 kg/m^3"
+    PoissonRatio: "0.33"
+    ShearModulus: "26000 MPa"
+    UltimateStrain: "12"
+    UltimateTensileStrength: "186 MPa"
+    YieldStrength: "145 MPa"
+    YoungsModulus: "68900 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.0000234 m/m/K"

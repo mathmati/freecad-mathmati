@@ -1,0 +1,35 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "4e8f96f1-3472-42b2-8c35-e6cf643409ce"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "17-4PH Stainless Steel (H900)"
+  Description: "Precipitation-hardening martensitic stainless steel, condition H900"
+Inherits:
+  Steel:
+    UUID: "4b849c55-6b3a-4f75-a055-40c0d0324596"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Metal"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Stainless steel"
+    MaterialNumber: "UNS S17400"
+    StandardCode: "ASTM A564 / AMS 5643"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "7750 kg/m^3"
+    PoissonRatio: "0.272"
+    ShearModulus: "77000 MPa"
+    UltimateStrain: "10"
+    UltimateTensileStrength: "1310 MPa"
+    YieldStrength: "1170 MPa"
+    YoungsModulus: "196000 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.0000109 m/m/K"

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>FreeCAD Engineering Standards Library</name>
+  <description>21 curated, verified standard engineering material-property cards (structural steels, stainless, aluminum, titanium, copper alloys, cast/ductile iron, one polymer, magnesium) that install into FreeCAD's own Material library. 15 are net-new to the FreeCAD ecosystem (including AZ31B, the first magnesium alloy in FreeCAD core or Supplemental-Materials); 6 are equivalent/corrected variants of an existing core card, included for their searchable standard designation. A prior-art pass against FreeCAD core removed 7 exact-duplicate cards before this release. Structural-profile and thread/fastener data are planned for a future release.</description>
+  <version>0.4.0</version>
+  <date>2026-07-10</date>
+  <maintainer email="177616452+mathmati@users.noreply.github.com">mathmati</maintainer>
+  <license file="LICENSE-Code">MIT</license>
+  <url type="repository" branch="main">https://github.com/mathmati/FreeCAD-Standards-Library</url>
+  <url type="readme">https://github.com/mathmati/FreeCAD-Standards-Library/raw/main/README.md</url>
+  <url type="bugtracker">https://github.com/mathmati/FreeCAD-Standards-Library/issues</url>
+  <icon>Resources/Icons/standards_library.svg</icon>
+  <freecadmin>1.1.0</freecadmin>
+  <pythonmin>3.9</pythonmin>
+  <content>
+    <workbench>
+      <classname>StandardsLibraryWorkbench</classname>
+      <icon>Resources/Icons/standards_library.svg</icon>
+    </workbench>
+  </content>
+  <tag>materials</tag>
+  <tag>bim</tag>
+  <tag>structural</tag>
+  <tag>standards</tag>
+  <tag>data</tag>
+</package>

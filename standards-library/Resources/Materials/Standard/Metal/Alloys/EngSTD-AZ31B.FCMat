@@ -1,0 +1,33 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "e1337f19-31d2-43fd-8d9c-f69b64da4df8"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "Magnesium AZ31B"
+  Description: "Wrought magnesium-aluminum-zinc alloy"
+  SourceURL: "https://en.wikipedia.org/wiki/Magnesium_alloy"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Metal"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Magnesium alloy"
+    MaterialNumber: "UNS M11311"
+    StandardCode: "ASTM B90/B107"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "1770 kg/m^3"
+    PoissonRatio: "0.35"
+    ShearModulus: "17000 MPa"
+    UltimateStrain: "15"
+    UltimateTensileStrength: "260 MPa"
+    YieldStrength: "200 MPa"
+    YoungsModulus: "45000 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.000026 m/m/K"

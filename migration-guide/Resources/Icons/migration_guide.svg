@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b6cb0"/>
+      <stop offset="1" stop-color="#1a365d"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="url(#bg)" stroke="#0f2942" stroke-width="2"/>
+  <!-- left "source CAD" node -->
+  <circle cx="17" cy="20" r="7" fill="#f6ad55" stroke="#7b341e" stroke-width="1.5"/>
+  <!-- right "FreeCAD" node -->
+  <circle cx="47" cy="44" r="7" fill="#68d391" stroke="#22543d" stroke-width="1.5"/>
+  <!-- extra small nodes to suggest a concept map -->
+  <circle cx="17" cy="44" r="4.5" fill="#fbd38d" stroke="#7b341e" stroke-width="1.2"/>
+  <circle cx="47" cy="20" r="4.5" fill="#9ae6b4" stroke="#22543d" stroke-width="1.2"/>
+  <!-- connecting arrows (migration map) -->
+  <path d="M23 21 L41 42" stroke="#e2e8f0" stroke-width="2.4" fill="none"/>
+  <path d="M20 25 L44 41" stroke="#e2e8f0" stroke-width="2" fill="none" opacity="0.8"/>
+  <path d="M21 44 L42 44" stroke="#e2e8f0" stroke-width="2" fill="none" opacity="0.8"/>
+  <path d="M17 27 L17 39.5" stroke="#e2e8f0" stroke-width="2" fill="none" opacity="0.6"/>
+  <!-- arrowhead -->
+  <path d="M41 42 L37 40.5 L38.5 44.5 Z" fill="#e2e8f0"/>
+  <text x="32" y="59" font-family="sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">MIGRATE</text>
+</svg>

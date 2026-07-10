@@ -1,0 +1,36 @@
+---
+# SPDX-License-Identifier: CC-BY-4.0
+# FableMax oss-unlock unit -- FreeCAD Engineering Standards Library (M2)
+# Values cross-checked against >=2 independent public sources -- see
+# ../../../../../../DATA_PROVENANCE.md in this repo for the full citation table.
+General:
+  UUID: "a2b651d2-e825-4acc-80da-14b0e92954f9"
+  Author: "FableMax oss-unlock unit"
+  License: "CC-BY-4.0"
+  Name: "C11000 Copper (Annealed)"
+  Description: "Electrolytic tough pitch (ETP) copper, annealed condition"
+  SourceURL: "https://en.wikipedia.org/wiki/Copper"
+Inherits:
+  Copper:
+    UUID: "524cad9b-b841-4037-9851-badeca7dcee2"
+Models:
+  Father:
+    UUID: '9cdda8b6-b606-4778-8f13-3934d8668e67'
+    Father: "Metal"
+  MaterialStandard:
+    UUID: '1e2c0088-904a-4537-925f-64064c07d700'
+    KindOfMaterial: "Copper"
+    MaterialNumber: "UNS C11000"
+    StandardCode: "ASTM B152"
+  LinearElastic:
+    UUID: '7b561d1d-fb9b-44f6-9da9-56a4f74d7536'
+    Density: "8940 kg/m^3"
+    PoissonRatio: "0.343"
+    ShearModulus: "43000 MPa"
+    UltimateStrain: "50"
+    UltimateTensileStrength: "220 MPa"
+    YieldStrength: "69 MPa"
+    YoungsModulus: "117000 MPa"
+  Thermal:
+    UUID: '9959d007-a970-4ea7-bae4-3eb1b8b883c7'
+    ThermalExpansionCoefficient: "0.0000165 m/m/K"

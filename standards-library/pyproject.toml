@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freecad-standards-library"
+version = "0.3.0"
+description = "Curated standard engineering data (steel sections, threads, material property cards) for FreeCAD's Material and BIM/Arch profile libraries."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["freecad*"]

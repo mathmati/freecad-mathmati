@@ -1,0 +1,18 @@
+# FreeCAD Engineering Standards Library — structural profile presets.
+#
+# Same schema as FreeCAD's own Mod/BIM/Presets/profiles.csv (see FORMAT.md
+# section 2.2): "Category,Name,Class,<geometric data...>", all measures in
+# millimeters. Classes implemented by the installed FreeCAD's ArchProfile.py:
+#   C = circular tube            (Outside diameter, Thickness)
+#   H = H/I-profile               (width, height, web thickness, flange thickness)
+#   R = rectangular solid         (width, height)
+#   RH = rectangular hollow       (width, height, thickness)
+#   U = channel/U-profile         (width, height, web thickness, flange thickness)
+#   L = angle                     (width, height, thickness)
+#   TSLOT = T-slot extrusion      (size, slot_size, wall_thickness, tnut_slot_width, tnut_slot_depth, core_size, hole_diameter, rd)
+#
+# M1 ships this file with ZERO data rows on purpose (see FORMAT.md section 4
+# and STATE.md M1) -- the real, sourced/cited rows land in M2 per SOURCES.md.
+# freecad/StandardsLibraryWB/sync.py merges every non-comment, non-blank row
+# from this file into FreeCAD's user profiles.csv (readPresets()'s third
+# search path) on FreeCAD GUI startup.
