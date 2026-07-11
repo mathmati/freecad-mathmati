@@ -164,7 +164,7 @@ reads or writes FreeCAD's own `Mod/Start` first-run parameters.
 
 ## License
 
-Code is MIT-licensed — see [`LICENSE-Code`](LICENSE-Code). The manifest
+Code is MIT-licensed — see [`LICENSE`](LICENSE). The manifest
 (`package.xml`) declares the same SPDX identifier consistently.
 
 ## Contributing

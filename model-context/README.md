@@ -102,5 +102,5 @@ auto-register with zero Report-View errors.
 
 ## License
 
-Code is MIT (see `LICENSE-Code` and the SPDX headers). The schema in
+Code is MIT (see `LICENSE` and the SPDX headers). The schema in
 `SCHEMA.md` is free to implement/adopt.
