@@ -15,6 +15,7 @@ Manager.
 | **[push-pull](push-pull/)** | *Model it easily.* SketchUp-style direct modelling: click a face, drag along its normal with a live ghost preview and numeric readout, release to commit a **parametric** PartDesign Pad/Pocket — or extrude a standalone drawn face into a solid. Type a number for precision. |
 | **[sketch-layer](sketch-layer/)** | *Draw it easily.* SketchUp-style inline drawing: line/rectangle in the 3D view with **colored inference cues** (on-axis, parallel, perpendicular, endpoint) and inline type-to-dimension. Closing a loop makes a face — ready to push/pull. Adds the colored-inference layer on top of FreeCAD's own Draft snapping. |
 | **[ai-render](ai-render/)** | *Show it off.* Stylized AI rendering of the active 3D view: captures a color image plus a geometry-faithful line-art control image and sends both to a bring-your-own provider (local ComfyUI by default — free, keyless — or Stability AI / OpenAI with your own key). Complements the physically-accurate (and unmaintained) Render workbench with a fast, stylized alternative. |
+| **[model-context](model-context/)** | *Bring your own AI.* Serializes a document's semantic model — feature tree, parameters (with expressions), and Sketcher geometry **with its constraint graph** — into a canonical, versioned, tool-agnostic JSON schema plus LLM-legible Markdown. Grounding context any LLM / agent / MCP tool can consume, published as a schema anyone can adopt rather than an ad-hoc per-tool dump. |
 
 ## Notes
 
