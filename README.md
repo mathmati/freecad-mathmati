@@ -28,3 +28,7 @@ the Addon Manager.
 
 Code is MIT (see each add-on's `LICENSE` and SPDX headers). Material data in
 standards-library is CC-BY-4.0.
+
+## Transparency
+
+Built with [Claude Code](https://claude.com/claude-code).
