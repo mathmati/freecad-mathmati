@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
   <name>AIRender</name>
-  <description>Stylized AI image rendering for FreeCAD: capture the active 3D viewport (color + a geometry-faithful line-art control image), send it as img2img/ControlNet-style input to a BYO-key image model -- a local ComfyUI endpoint by default (zero cost, no account), or Stability AI / OpenAI with your own API key -- and save the styled result next to your document. Complements the unmaintained Render workbench: fast/stylized instead of slow/physically-accurate. No bundled billing, no bundled models -- you bring the provider.</description>
+  <description>Render the FreeCAD 3D view with an AI image model. Captures a color image plus a line-art control image and sends both to your own ComfyUI, Stability AI or OpenAI account. Results are saved next to the document.</description>
   <version>0.1.0</version>
   <date>2026-07-10</date>
   <maintainer email="177616452+mathmati@users.noreply.github.com">mathmati</maintainer>

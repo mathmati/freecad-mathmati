@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
   <name>FreeCAD Migration Guide</name>
-  <description>Helps Fusion 360 / SolidWorks users migrate to FreeCAD with a searchable concept-map guide and a step-by-step guided tour of the PartDesign sketch-pad-pocket-save workflow. Complements (never replaces) FreeCAD's built-in First Start setup.</description>
+  <description>A searchable concept map and a guided first-part tour for people coming to FreeCAD from Fusion 360 or SolidWorks.</description>
   <version>0.1.0</version>
   <date>2026-07-08</date>
   <maintainer email="177616452+mathmati@users.noreply.github.com">mathmati</maintainer>
