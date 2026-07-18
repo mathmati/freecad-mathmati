@@ -1,4 +1,4 @@
-# Materials data — 21 curated, cross-checked engineering material cards
+# Materials data - 21 curated, cross-checked engineering material cards
 
 This directory mirrors FreeCAD's own material-card taxonomy
 (`Standard/Metal/Steel/`, `Standard/Metal/Aluminum/`, etc.). All files named `EngSTD-*.FCMat` are this
@@ -12,7 +12,7 @@ exact duplicates of core cards and removed them pre-release. See
 removed) and `../../DATA_PROVENANCE.md` for the full record.
 
 Every mechanical property in every card was cross-checked against **at
-least two independent public sources** before being written — see
+least two independent public sources** before being written - see
 `../../DATA_PROVENANCE.md` for the full material × property × source ×
 agreement table, including the handful of values flagged for human
 review rather than silently resolved. Field names/units/model UUIDs were

@@ -53,7 +53,7 @@ class RenderWorker(QtCore.QThread):
 class AIRenderDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AIRenderDialog, self).__init__(parent)
-        self.setWindowTitle("AI Render…")
+        self.setWindowTitle("AI Render...")
         self.resize(560, 700)
 
         self._worker = None
@@ -146,7 +146,7 @@ class AIRenderDialog(QtWidgets.QDialog):
         self.output_edit = QtWidgets.QLineEdit()
         self.output_edit.setPlaceholderText("(default: <document folder>/airender/)")
         out_row.addWidget(self.output_edit, 1)
-        browse_button = QtWidgets.QPushButton("Browse…")
+        browse_button = QtWidgets.QPushButton("Browse...")
         browse_button.clicked.connect(self._on_browse_output)
         out_row.addWidget(browse_button)
         layout.addLayout(out_row)
@@ -191,7 +191,7 @@ class AIRenderDialog(QtWidgets.QDialog):
         footer = QtWidgets.QLabel(
             "Images may be sent to a third-party provider you configure (or "
             "stay entirely local with ComfyUI). No API keys are ever stored "
-            "in FreeCAD's own preferences -- see README “Key storage”."
+            "in FreeCAD's own preferences -- see README 'Key storage'."
         )
         footer.setWordWrap(True)
         footer.setStyleSheet("color: palette(mid); font-size: 10px;")
@@ -436,7 +436,7 @@ class AIRenderDialog(QtWidgets.QDialog):
     def _on_capture_only(self):
         self._save_settings()
         try:
-            self.status_label.setText("Capturing…")
+            self.status_label.setText("Capturing...")
             QtWidgets.QApplication.processEvents()
             self._run_capture()
             self.status_label.setText(
@@ -454,7 +454,7 @@ class AIRenderDialog(QtWidgets.QDialog):
     def _on_render(self):
         self._save_settings()
         try:
-            self.status_label.setText("Capturing…")
+            self.status_label.setText("Capturing...")
             QtWidgets.QApplication.processEvents()
             self._run_capture()
         except Exception as exc:  # noqa: BLE001
@@ -471,7 +471,7 @@ class AIRenderDialog(QtWidgets.QDialog):
                 "Capture done. {} is not configured yet.".format(provider.display_name)
             )
             QtWidgets.QMessageBox.information(
-                self, "AI Render — provider not configured", provider.configuration_hint()
+                self, "AI Render - provider not configured", provider.configuration_hint()
             )
             return
 
@@ -486,7 +486,7 @@ class AIRenderDialog(QtWidgets.QDialog):
 
         self._set_busy(True)
         self.progress_bar.setRange(0, 0)
-        self.status_label.setText("Sending to {}…".format(provider.display_name))
+        self.status_label.setText("Sending to {}...".format(provider.display_name))
 
         self._worker = RenderWorker(provider, request, self)
         self._worker.finished_ok.connect(lambda result: self._on_render_finished(provider, request, result))

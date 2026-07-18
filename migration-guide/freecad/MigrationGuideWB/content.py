@@ -43,7 +43,7 @@ CONCEPT_MAP_ROWS = [
     (
         "Collinear constraint",
         "Tangent constraint (applied to two lines)",
-        "FreeCAD's Sketcher has no separate “Collinear” constraint. "
+        "FreeCAD's Sketcher has no separate 'Collinear' constraint. "
         "Applying Tangent to two straight line segments forces them onto the "
         "same infinite line -- same effect, different name. (Coincident, for "
         "matching two points, is named the same in both systems.)",
@@ -105,7 +105,7 @@ LINKS_OUT = [
         "https://wiki.freecad.org/Migrating_to_FreeCAD_from_Fusion360",
     ),
     (
-        "Brodie Fairhall -- “Fusion 360 to FreeCAD” video series",
+        "Brodie Fairhall -- 'Fusion 360 to FreeCAD' video series",
         "https://www.youtube.com/results?search_query=brodie+fairhall+fusion+360+to+freecad",
     ),
     (
@@ -155,7 +155,7 @@ def _concept_table_html(filter_text):
             )
         )
     if not rows_html:
-        return "<p class='note'><i>No concept-map rows match “{0}”.</i></p>".format(
+        return "<p class='note'><i>No concept-map rows match '{0}'.</i></p>".format(
             filter_text
         )
     return (

@@ -38,7 +38,7 @@ class StartTourCommand(object):
 
     def GetResources(self):
         return {
-            "MenuText": "Start Guided Tour…",
+            "MenuText": "Start Guided Tour...",
             "ToolTip": "Starts the step-by-step first-part tour (sketch, pad, pocket, save)",
             "Pixmap": _ICON_PATH,
         }

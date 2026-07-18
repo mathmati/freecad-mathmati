@@ -17,7 +17,7 @@ class AIRenderOpenCommand(object):
 
     def GetResources(self):
         return {
-            "MenuText": "AI Render…",
+            "MenuText": "AI Render...",
             "ToolTip": (
                 "Capture the active 3D view (color + line-art control image) "
                 "and generate a styled AI render via a BYO-key provider"

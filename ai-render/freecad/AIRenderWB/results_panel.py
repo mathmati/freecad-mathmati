@@ -9,7 +9,7 @@ from PySide import QtCore, QtGui, QtWidgets
 class ResultsDialog(QtWidgets.QDialog):
     def __init__(self, image_paths, info_text, parent=None):
         super(ResultsDialog, self).__init__(parent)
-        self.setWindowTitle("AI Render — Result")
+        self.setWindowTitle("AI Render - Result")
         self.resize(560, 640)
 
         layout = QtWidgets.QVBoxLayout(self)

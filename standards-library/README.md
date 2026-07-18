@@ -1,14 +1,14 @@
 # FreeCAD Engineering Standards Library
 
 An Addon-Manager addon that fills FreeCAD 1.1's Material system with
-**21 curated, cross-checked engineering material cards** — real, sourced
+**21 curated, cross-checked engineering material cards** - real, sourced
 mechanical properties for the structural steels, stainless steels,
 aluminum alloys, titanium, copper alloys, cast/ductile irons, one
 polymer, and one magnesium alloy that engineers, FEM users, and makers
 actually reach for.
 
 Screenshot (FreeCAD 1.1.0, genuinely clean-install re-verify, 2026-07-10,
-after the pre-release prior-art pass removed 7 duplicate cards — tree
+after the pre-release prior-art pass removed 7 duplicate cards - tree
 shows 21/21):
 
 ![Material Editor showing the populated Standards Library, 21 cards, "17-4PH Stainless Steel (H900)" selected](docs/screenshots/m3_clean_install_material_editor.png)
@@ -16,13 +16,13 @@ shows 21/21):
 ## What this is
 
 FreeCAD's own Material system ships with a good `LinearElastic` /
-`MaterialStandard` data model, and — as of a 2026-07-10 prior-art pass
-against FreeCAD's live core source tree — a *larger* pre-populated grade
+`MaterialStandard` data model, and - as of a 2026-07-10 prior-art pass
+against FreeCAD's live core source tree - a *larger* pre-populated grade
 set than this project's earlier drafts assumed (core's `Metal/Steel/`
 alone ships roughly 90 files, including 7 stainless grades and several
 EN-GJL/EN-GJS cast-iron grades filed under Steel; see "Prior art and
 honest positioning" below for the full verified inventory). This addon
-does not replace or duplicate FreeCAD's own material cards — it *extends*
+does not replace or duplicate FreeCAD's own material cards - it *extends*
 the same taxonomy (`Standard/Metal/Steel`, `Standard/Metal/Aluminum`,
 `Standard/Thermoplast`, etc.) with 21 additional grades, each
 cross-checked against real published data before being added. 7 cards
@@ -40,7 +40,7 @@ removed pre-release (see below) rather than shipped as padding.
   generic categories.
 - **Makers/FDM users** who want Nylon 6/6 (PA66) properties alongside
   metal/alloy options (ABS and PLA are already shipped by FreeCAD core
-  itself and are intentionally not duplicated here — see below).
+  itself and are intentionally not duplicated here - see below).
 
 ## Prior art and honest positioning
 
@@ -57,7 +57,7 @@ this release; this addon now ships exactly the 21 cards that add real,
 distinct value. This is a factual-accuracy correction made proactively,
 not a response to external review.
 
-### Tier 1 — Net-new (15): no equivalent anywhere in core or Supplemental-Materials
+### Tier 1 - Net-new (15): no equivalent anywhere in core or Supplemental-Materials
 
 | Category | Material | Standard / designation |
 |---|---|---|
@@ -83,19 +83,19 @@ US/ASTM name they actually know finds nothing today. The two cast-iron
 cards do the same for ASTM A48/A536 designations (core only has EN-GJL/
 EN-GJS grades, filed under `Steel/`, not `Iron/`). **AZ31B is the
 headline item: zero magnesium materials exist anywhere in FreeCAD core or
-Supplemental-Materials today** — this is the first magnesium alloy
+Supplemental-Materials today** - this is the first magnesium alloy
 available in the FreeCAD ecosystem, core-or-supplemental, full stop.
 
-### Tier 2 — Equivalent/corrected (6): same grade family already in core, different designation or a corrected value
+### Tier 2 - Equivalent/corrected (6): same grade family already in core, different designation or a corrected value
 
 | Material | Core counterpart | Why ours is still included |
 |---|---|---|
 | S355JR | `Steel-S355J2G3.FCMat` (numerically identical; JR vs J2G3 differ only in Charpy-impact test temperature, not strength) | Searchable under the EN 10025 "JR" designation engineers actually specify, with that provenance stated plainly |
 | 6082-T6 | `AlMgSi1F31.FCMat` (numerically identical; same alloy, DIN vs EN naming) | Searchable under the EN/UNS "6082-T6" name rather than the DIN designation |
-| 304 (X5CrNi18-10) | `Steel-X5CrNi18-10.FCMat` | Same grade, but this card's ShearModulus/Density were corrected by this project's own isotropic-consistency audit (`G = E/(2(1+ν))`) to a value consistent with an austenitic stainless's actual elastic constants — core's card was not; see `DATA_PROVENANCE.md` |
+| 304 (X5CrNi18-10) | `Steel-X5CrNi18-10.FCMat` | Same grade, but this card's ShearModulus/Density were corrected by this project's own isotropic-consistency audit (`G = E/(2(1+ν))`) to a value consistent with an austenitic stainless's actual elastic constants - core's card was not; see `DATA_PROVENANCE.md` |
 | 316L (X2CrNiMo17-12-2) | `Steel-X5CrNiMo17-12-2.FCMat` (that's 316, standard-carbon 1.4401, not low-carbon 1.4404/"L") | Distinct low-carbon designation engineers specifically call out for welding; core has no 1.4404 card at all |
 | C11000 Copper (Annealed) | `Copper-102.FCMat` (C10200, different temper/spec) + `Copper-Generic.FCMat` | Distinct exact UNS designation and temper (OS050 annealed) from the closest core/Supplemental-Materials match |
-| Nylon 6/6 (PA66) | `PA6-Generic.FCMat` (that's PA6, not PA66) | Distinct polymer chemistry (66 vs 6) with slightly different strength, near-identical elastic constants — core has no PA66 card |
+| Nylon 6/6 (PA66) | `PA6-Generic.FCMat` (that's PA6, not PA66) | Distinct polymer chemistry (66 vs 6) with slightly different strength, near-identical elastic constants - core has no PA66 card |
 
 ### Removed pre-release (7): exact duplicates of core, not shipped
 
@@ -105,7 +105,7 @@ cross-check anchors against known-good core values. The prior-art pass
 found their mechanical properties are byte-for-byte identical to FreeCAD's
 own shipped `Steel-S235JR.FCMat`, `Steel-S275JR.FCMat`,
 `Aluminum-6061-T6.FCMat`, `Aluminum-7075-T6.FCMat`, `Ti-6Al-4V.FCMat`,
-`ABS-Generic.FCMat`, and `PLA-Generic.FCMat` — adding them would have
+`ABS-Generic.FCMat`, and `PLA-Generic.FCMat` - adding them would have
 created two near-identical-looking entries in the Material Editor tree for
 zero new data. They were deleted before this release rather than shipped
 as padding; their removal is recorded, not hidden, in
@@ -125,7 +125,7 @@ like any built-in card.
 `Tools → Addon manager` → search for "Engineering Standards Library"
 (after this addon is indexed), or add this repository's URL under
 **Addon Manager → Configure → Custom repositories** for early access
-before it is indexed. Restart FreeCAD — no further action is needed, the
+before it is indexed. Restart FreeCAD - no further action is needed, the
 sync runs automatically (see "What this addon does" below).
 
 ### Manually (developer / local test install)
@@ -138,8 +138,8 @@ this folder into your FreeCAD `Mod/` directory:
 - Windows: `%APPDATA%\FreeCAD\Mod\`
 - macOS: `~/Library/Application Support/FreeCAD/Mod/`
 
-Restart FreeCAD, then open **Material → Edit** — all 21 cards appear
-under **User → EngineeringStandardsLibrary → Standard → …** in the
+Restart FreeCAD, then open **Material → Edit** - all 21 cards appear
+under **User → EngineeringStandardsLibrary → Standard → ...** in the
 Material Editor's tree.
 
 ## What this addon does
@@ -147,9 +147,9 @@ Material Editor's tree.
 On every FreeCAD GUI startup, it copies its own bundled
 `Resources/Materials/**/*.FCMat` files into FreeCAD's real, writable User
 material library (there is no manifest or path-registration API for
-third-party material libraries as of FreeCAD 1.1.0 — copying into the
+third-party material libraries as of FreeCAD 1.1.0 - copying into the
 one writable "User" library directory is the only supported mechanism). It also
-merges its own (currently empty — see Scope below) bundled
+merges its own (currently empty - see Scope below) bundled
 `Resources/Profiles/profiles.csv` rows into FreeCAD's real, writable user
 BIM `profiles.csv`, in a clearly delimited, idempotent managed block that
 never touches anything else already in that shared file. See
@@ -165,7 +165,7 @@ state (no pre-existing synced data), and:
 
 - The Material Editor's tree showed **21/21** cards under
   `User → EngineeringStandardsLibrary`, programmatically counted via the
-  tree widget's own model (not eyeballed) — re-verified after the 7
+  tree widget's own model (not eyeballed) - re-verified after the 7
   duplicate cards were removed.
 - A headless enumeration (`Materials.MaterialManager`, run once per
   material to work around a real FreeCAD 1.1.0 Materials-module crash
@@ -186,20 +186,20 @@ isotropic-consistency pass (`ShearModulus` vs. `E / (2·(1+ν))`, flagged if
 >5% off) was additionally applied across the (then-28, now-21) cards,
 correcting two values found inconsistent. Two values are flagged for
 human review rather than silently resolved (a third, PLA's ultimate
-tensile strength, no longer applies — the PLA card was removed pre-release
+tensile strength, no longer applies - the PLA card was removed pre-release
 as an exact duplicate of FreeCAD's own core card; see "Removed pre-release"
 above):
 
-1. **ASTM A36 Poisson's ratio** — a genuine ~15% literature split
+1. **ASTM A36 Poisson's ratio** - a genuine ~15% literature split
    (0.26 vs. 0.30); 0.30 was adopted for consistency with the rest of the
    steel family.
-2. **Gray Cast Iron G3000 yield strength** (140 MPa) — an estimated
+2. **Gray Cast Iron G3000 yield strength** (140 MPa) - an estimated
    proportional proof stress, not a directly published number (gray iron
    has no true yield point).
 
 Full material × property × source × agreement table:
 [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md). Nothing here is copied
-prose or a scraped database row — every value is a re-expressed
+prose or a scraped database row - every value is a re-expressed
 standard/grade nominal property, cross-checked, not bulk-copied from any
 single encumbered source (see `SOURCES.md` for the licensing reasoning).
 
@@ -207,7 +207,7 @@ single encumbered source (see `SOURCES.md` for the licensing reasoning).
 
 **Materials only.** The BIM/Arch structural-profile sync mechanism (HSS
 sections, UK Blue Book, etc.) and thread/fastener data were proven
-end-to-end at the mechanism level in an earlier milestone but are **not yet populated with real data** —
+end-to-end at the mechanism level in an earlier milestone but are **not yet populated with real data** -
 `Resources/Profiles/profiles.csv` ships empty in this release. Filling
 that gap, and the CAM machinability/chipload data gap, are future work, not silently dropped scope.
 
@@ -217,21 +217,21 @@ This addon makes **zero network connections** of any kind, has **zero**
 required Python dependencies, and performs no `sys.path` manipulation.
 Its only side effect is copying its own bundled data files into FreeCAD's
 own writable library directories on startup (see "What this addon does"
-above) — no telemetry, no external calls, nothing sent anywhere.
+above) - no telemetry, no external calls, nothing sent anywhere.
 
 ## License
 
-**Code:** MIT (`LICENSE`). **Material data:** Creative Commons Attribution 4.0 (CC BY 4.0) — see [`LICENSE-Data`](LICENSE-Data); each `.FCMat` card also carries its own `# SPDX-License-Identifier: CC-BY-4.0` header and `General.License` field. Provenance: [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md).
+**Code:** MIT (`LICENSE`). **Material data:** Creative Commons Attribution 4.0 (CC BY 4.0) - see [`LICENSE-Data`](LICENSE-Data); each `.FCMat` card also carries its own `# SPDX-License-Identifier: CC-BY-4.0` header and `General.License` field. Provenance: [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md).
 
 ## Known limitations / roadmap
 
 - Structural-profile (HSS/Blue-Book sections) and thread/fastener data
-  are deferred — see Scope above.
+  are deferred - see Scope above.
 - UI strings are not yet translation-wrapped (`FreeCAD.Qt.translate`);
   this addon's only user-facing string surface today is the one
   "Re-sync standards data" toolbar command.
 - Two values are flagged for human review before being treated as
-  fully authoritative for precision engineering analysis — see Data
+  fully authoritative for precision engineering analysis - see Data
   provenance above.
 
 ## Delivery path: also pursuing upstream contribution, not just the addon
@@ -241,8 +241,8 @@ exactly this purpose ("a materials database that supplements the core
 materials provided by the FreeCAD application"), already in the live
 Addon Manager index, small and active, with a documented contribution
 process (`Documentation/AddingMaterials.md`). The strongest Tier-1 net-new
-cards here — especially **AZ31B** (fills a real, total gap) and the five
-ASTM/AISI steels — are also being prepared as PRs to that repo as the
+cards here - especially **AZ31B** (fills a real, total gap) and the five
+ASTM/AISI steels - are also being prepared as PRs to that repo as the
 preferred, durable upstream route (landing in the official curated
 channel rather than only a third-party addon). This addon remains the
 convenient-install companion path: useful on its own, and not contingent

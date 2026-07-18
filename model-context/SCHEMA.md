@@ -1,10 +1,10 @@
-# FreeCAD Model Context — schema `freecad-model-context` v1.0
+# FreeCAD Model Context - schema `freecad-model-context` v1.0
 
 A canonical, versioned, **tool-agnostic** JSON serialization of a FreeCAD
 document's *semantic* model: the feature tree, each feature's parametric
 inputs (with expressions), the Sketcher geometry **with its constraint
 graph**, attachments, and assigned materials. It is grounding context for an
-LLM / agent / MCP tool — a published schema anyone can adopt, rather than the
+LLM / agent / MCP tool - a published schema anyone can adopt, rather than the
 ad-hoc per-tool dumps each FreeCAD AI/MCP server reinvents today.
 
 **Prior art / lineage.** The point-based geometry + constraint-as-edge model
@@ -47,7 +47,7 @@ additive (new optional keys); a major bump may change existing keys.
 ```
 
 - **`role`** classifies the object so a consumer can filter (e.g. ignore
-  `datum` scaffolding — origin planes/axes are emitted as identity-only nodes).
+  `datum` scaffolding - origin planes/axes are emitted as identity-only nodes).
 - **`params`** contains only properties a user meaningfully set: computed
   shapes, hidden/transient/output properties, attacher internals, and values
   left at their type default are omitted by design.
@@ -117,11 +117,11 @@ the sketch's local 2D frame.
 
 - `geometry`: index into the sketch's `geometry` array (its GeoId).
 - `element`: for the sketch's own axes/origin (`x_axis`, `y_axis`, `origin`).
-- `point`: `start` | `end` | `center` — omitted when the constraint applies to
+- `point`: `start` | `end` | `center` - omitted when the constraint applies to
   the whole element (e.g. `Horizontal` on a line).
 
 FreeCAD's internal `PointPos` integers and the `-2000` "unused" sentinel are
-NOT exposed — they are resolved to the named roles above so the graph is
+NOT exposed - they are resolved to the named roles above so the graph is
 self-describing.
 
 ## `material`
