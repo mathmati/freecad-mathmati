@@ -1,7 +1,7 @@
 # FreeCAD add-ons by mathmati
 
 A small suite of FreeCAD 1.1 add-ons with one goal: **make FreeCAD more
-approachable** — easier to learn, better equipped, and able to work with the
+approachable** : easier to learn, friendlier when you open it, better equipped, and able to work with the
 real world. Each add-on is independent and installable via the FreeCAD Add-on
 Manager.
 
