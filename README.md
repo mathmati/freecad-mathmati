@@ -17,6 +17,7 @@ Manager.
 | **[ai-render](ai-render/)** | Render the 3D view with an AI image model, using your own ComfyUI, Stability AI or OpenAI account. A line-art control image keeps the result true to your geometry. [draft not circulated] |
 | **[model-context](model-context/)** | Exports a document's feature tree, parameters and sketch constraints as JSON or Markdown, so AI tools can read the model instead of guessing from screenshots. [draft not circulated] |
 | **[freecad-diff](freecad-diff/)** | Shows what changed between two versions of a document: which dimension moved, which feature was added, plus a visual overlay of both shapes. Works from the GUI, the command line, and `git diff`. Early, feedback welcome. See: [mathmati/freecad-diff](https://github.com/mathmati/freecad-diff). [**beta - live for initial discussion and feedback**] |
+| **[uppercut](https://github.com/mathmati/uppercut)** | A SketchUp-style interface for FreeCAD: one toolbar with Select, draw tools, Push/Pull, Eraser, Tape Measure and Paint Bucket, assembled from the companion add-ons above plus its own glue tools. SketchUp navigation and single-letter shortcuts, scoped to the workbench. [**beta - live for initial discussion and feedback**] |
 
 ## Notes
 
