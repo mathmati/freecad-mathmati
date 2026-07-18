@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- old version: grey dashed outline -->
+  <rect x="11" y="11" width="30" height="30" rx="3" fill="none"
+        stroke="#8c959f" stroke-width="3" stroke-dasharray="5 4"/>
+  <!-- new version: solid blue, offset over the old -->
+  <rect x="23" y="23" width="30" height="30" rx="3" fill="#dbeafe"
+        stroke="#0969da" stroke-width="3.2"/>
+  <!-- added marker -->
+  <circle cx="49" cy="15" r="8.5" fill="#1a7f37"/>
+  <path d="M49 10.5 v9 M44.5 15 h9" stroke="#ffffff" stroke-width="2.6"
+        stroke-linecap="round"/>
+</svg>

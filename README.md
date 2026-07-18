@@ -15,6 +15,7 @@ the Addon Manager.
 | **[sketch-layer](sketch-layer/)** | Draw lines and rectangles in the 3D view with SketchUp-style colored snapping cues and type-to-dimension. Closed shapes become faces you can push/pull. |
 | **[ai-render](ai-render/)** | Render the 3D view with an AI image model, using your own ComfyUI, Stability AI or OpenAI account. A line-art control image keeps the result true to your geometry. |
 | **[model-context](model-context/)** | Exports a document's feature tree, parameters and sketch constraints as JSON or Markdown, so AI tools can read the model instead of guessing from screenshots. |
+| **[freecad-diff](freecad-diff/)** | Shows what changed between two versions of a document: which dimension moved, which feature was added, plus a visual overlay of both shapes. Works from the GUI, the command line, and `git diff`. Early, feedback welcome. Also at [mathmati/freecad-diff](https://github.com/mathmati/freecad-diff). |
 
 ## Notes
 
