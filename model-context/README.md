@@ -47,6 +47,9 @@ Activate the **Model Context** workbench:
   `.modelcontext.md` next to the saved document.
 - **Copy Model Context (Markdown)** — copies the Markdown to the clipboard,
   ready to paste into an AI chat.
+- **Diff Against Saved** / **Diff Two Files…** — show what changed as a
+  colored dialog, with **Export HTML Report…** to write a self-contained
+  visual report (see below).
 
 ## What it captures (example)
 
@@ -90,14 +93,42 @@ Model diff: bracket_v1.FCStd -> bracket_v2.FCStd
 ~ Body: tip Pad -> Pocket
 ```
 
-Three ways to use it:
+### Text is the default; visuals are there when you want them
 
-- **In the GUI:** the Model Context workbench has **Diff Against Saved**
-  (what changed since the last save) and **Diff Two Files**.
-- **From the command line** (exit code 0 = no changes, 1 = differences):
+The same structured diff renders four ways, so it fits both a terminal and a
+review:
+
+- **`text`** (default) — colored, terraform-plan-style terminal output: a
+  `+N / ~N / −N` summary then changes grouped per object with aligned
+  `old → new` rows. Color respects `NO_COLOR`, only paints real TTYs, and the
+  `+ ~ -` glyphs always remain so it degrades losslessly. `MC_DIFF_SUMMARY=1`
+  gives just the counts and one head per touched object.
+- **`json`** — the canonical machine format (the diff dict itself), for
+  scripting and CI.
+- **`svg`** — a headless overlay that draws both versions as 2D line-art in
+  one image: **added** solid green, **removed** dashed red, **changed** shows
+  the old silhouette ghosted grey under the new one in solid blue. Color is
+  never the only channel (line style carries the same information), and
+  `MC_DIFF_PALETTE=okabe-ito` selects a colorblind-safe palette.
+- **`html`** — a single self-contained file (no external assets, no build
+  step): a sticky header with count chips, the visual overlay with
+  iso/front/top view tabs, and a collapsible `old → new` row per object.
+  Honors light/dark via `prefers-color-scheme` with a toggle.
+
+Ways to use it:
+
+- **In the GUI:** **Diff Against Saved** (what changed since the last save)
+  and **Diff Two Files…**, each with **Export HTML Report…**.
+- **From the command line** (exit code 0 = no changes, 1 = differences,
+  2 = error). Options are set with `MC_DIFF_*` env vars, because `freecadcmd`
+  owns the real command line:
 
   ```
   MC_DIFF_OLD=v1.FCStd MC_DIFF_NEW=v2.FCStd freecadcmd tools/modelcontext_diff.py
+  MC_DIFF_FORMAT=html MC_DIFF_OUTPUT=diff.html \
+      freecadcmd tools/modelcontext_diff.py v1.FCStd v2.FCStd
+  MC_DIFF_FORMAT=svg  MC_DIFF_OUTPUT=diff.svg  MC_DIFF_PALETTE=okabe-ito \
+      freecadcmd tools/modelcontext_diff.py v1.FCStd v2.FCStd
   ```
 
 - **From git**, so `git diff` shows semantic changes for `.FCStd` files:
@@ -108,8 +139,9 @@ Three ways to use it:
   ```
 
 As a library: `diff.diff_models(old, new)` returns a structured dict (see
-the appendix in `SCHEMA.md`), with `diff_to_text` and `diff_to_markdown`
-renderers.
+the appendix in `SCHEMA.md`); `diff_to_text`/`diff_to_markdown` (in `diff`),
+`render.diff_to_terminal`/`diff_to_json`, `svgdiff.build_overlay_svg`, and
+`htmlreport.diff_to_html` are the renderers.
 
 Honest limits: sketch geometry is compared by position (GeoId), so
 inserting an element mid-list reads as several edited elements, and
@@ -141,14 +173,13 @@ round-trips as JSON. A second regression covers the diff: identical models
 diff to empty; a Length change (15 to 20 mm), an added feature, a removed
 constraint, a renamed label, an expression change, and a dimensional-value
 edit are each detected and rendered; the CLI tool is exercised end-to-end on
-two saved files with its exit-code contract. A GUI check confirms the
-workbench and all four commands auto-register with zero Report-View errors.
+two saved files with its exit-code contract, and each presentation format is
+checked (valid JSON schema, a headless SVG overlay with a legend, a
+self-contained HTML report that embeds the overlay and references no external
+assets, and the summary verbosity level). A GUI check confirms the workbench
+and all four commands auto-register with zero Report-View errors.
 
 ## License
 
-Code is MIT (see `LICENSE` and the SPDX headers). The schema in
+Code is MIT (see `LICENSE-Code` and the SPDX headers). The schema in
 `SCHEMA.md` is free to implement/adopt.
-
-## Transparency
-
-Built with [Claude Code](https://claude.com/claude-code).

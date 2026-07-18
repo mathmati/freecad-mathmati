@@ -56,9 +56,9 @@ class _ExportCommand(object):
         model = S.serialize_document(doc)
         base = _output_base(doc)
         try:
-            with open(base + ".modelcontext.json", "w") as f:
-                json.dump(model, f, indent=2)
-            with open(base + ".modelcontext.md", "w") as f:
+            with open(base + ".modelcontext.json", "w", encoding="utf-8") as f:
+                json.dump(model, f, indent=2, ensure_ascii=False)
+            with open(base + ".modelcontext.md", "w", encoding="utf-8") as f:
                 f.write(S.to_markdown(model))
         except Exception as exc:  # noqa: BLE001
             _status("Model Context: export failed (%s)" % exc)
@@ -89,27 +89,106 @@ class _CopyMarkdownCommand(object):
             _status("Model Context: copy failed (%s)" % exc)
 
 
-def _show_diff_dialog(title, text):
+def _diff_to_qt_html(diff):
+    """A small rich-text fragment for Qt's rich-text engine (a subset of
+    HTML/CSS -- no flexbox/sticky, so this is deliberately simple: colored
+    +/~/- rows). The full self-contained report is what Export HTML writes."""
+    import html as _html
+
+    def e(s):
+        return _html.escape(str(s))
+
+    old_l = diff.get("old", {}).get("label") or "old"
+    new_l = diff.get("new", {}).get("label") or "new"
+    parts = ['<div style="font-family:sans-serif">']
+    parts.append('<p><b>Model diff:</b> %s &rarr; %s</p>' % (e(old_l), e(new_l)))
+    if D.is_empty(diff):
+        parts.append('<p style="color:#57606a">No semantic changes.</p></div>')
+        return "".join(parts)
+    n_add = len(diff.get("added", []))
+    n_chg = len(diff.get("changed", []))
+    n_rem = len(diff.get("removed", []))
+    parts.append('<p><span style="color:#1a7f37">+%d added</span> &nbsp; '
+                 '<span style="color:#9a6700">~%d changed</span> &nbsp; '
+                 '<span style="color:#cf222e">&minus;%d removed</span></p>'
+                 % (n_add, n_chg, n_rem))
+    parts.append('<pre style="font-family:monospace">')
+    for o in diff.get("added", []):
+        parts.append('<span style="color:#1a7f37">+ %s (%s)</span>\n'
+                     % (e(o.get("label") or o["id"]), e(o.get("type"))))
+    for o in diff.get("removed", []):
+        parts.append('<span style="color:#cf222e">- %s (%s)</span>\n'
+                     % (e(o.get("label") or o["id"]), e(o.get("type"))))
+    for o in diff.get("changed", []):
+        parts.append('<span style="color:#9a6700">~ %s</span>\n'
+                     % e(o.get("label") or o["id"]))
+        for raw in D._change_lines(o):
+            g = raw[:1]
+            col = {"+": "#1a7f37", "-": "#cf222e"}.get(g, "#57606a")
+            parts.append('    <span style="color:%s">%s</span>\n' % (col, e(raw)))
+    parts.append('</pre></div>')
+    return "".join(parts)
+
+
+def _show_diff_dialog(title, diff, on_export_html=None):
     dlg = QtWidgets.QDialog(Gui.getMainWindow())
     dlg.setWindowTitle(title)
-    dlg.resize(640, 480)
+    dlg.resize(680, 520)
     lay = QtWidgets.QVBoxLayout(dlg)
-    view = QtWidgets.QPlainTextEdit(dlg)
-    view.setReadOnly(True)
-    view.setPlainText(text)
-    view.setFont(QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.FixedFont))
+    view = QtWidgets.QTextBrowser(dlg)
+    view.setOpenExternalLinks(True)
+    view.setHtml(_diff_to_qt_html(diff))
     lay.addWidget(view)
     row = QtWidgets.QHBoxLayout()
-    copy_btn = QtWidgets.QPushButton("Copy", dlg)
-    close_btn = QtWidgets.QPushButton("Close", dlg)
     row.addStretch(1)
+    if on_export_html is not None:
+        html_btn = QtWidgets.QPushButton("Export HTML Report...", dlg)
+        html_btn.clicked.connect(on_export_html)
+        row.addWidget(html_btn)
+    copy_btn = QtWidgets.QPushButton("Copy Text", dlg)
+    close_btn = QtWidgets.QPushButton("Close", dlg)
     row.addWidget(copy_btn)
     row.addWidget(close_btn)
     lay.addLayout(row)
     copy_btn.clicked.connect(
-        lambda: QtWidgets.QApplication.clipboard().setText(view.toPlainText()))
+        lambda: QtWidgets.QApplication.clipboard().setText(D.diff_to_text(diff)))
     close_btn.clicked.connect(dlg.accept)
     dlg.exec_()
+
+
+def _export_html_report(diff, old_model, old_shapes, new_model, new_shapes,
+                        default_name):
+    """Save-dialog -> write the self-contained HTML report (with visual
+    overlay) -> open it in the user's browser."""
+    from . import htmlreport as H
+    from . import svgdiff as V
+
+    path, _ = QtWidgets.QFileDialog.getSaveFileName(
+        Gui.getMainWindow(), "Export HTML diff report",
+        default_name, "HTML report (*.html)")
+    if not path:
+        return
+    if not path.lower().endswith(".html"):
+        path += ".html"
+    try:
+        overlays = {}
+        if old_shapes is not None and new_shapes is not None:
+            overlays = V.build_overlays(diff, old_model, old_shapes,
+                                        new_model, new_shapes)
+        html = H.diff_to_html(diff, overlays=overlays)
+        # the report contains non-ASCII glyphs (arrows, minus sign); write
+        # UTF-8 explicitly so it does not crash on a non-UTF-8 locale
+        with open(path, "w", encoding="utf-8", newline="") as f:
+            f.write(html)
+    except Exception as exc:  # noqa: BLE001
+        _status("Model Context: HTML export failed (%s)" % exc)
+        return
+    _status("Model Context report written to %s" % path)
+    try:
+        from PySide import QtCore
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(path))
+    except Exception:
+        pass
 
 
 class _DiffSavedCommand(object):
@@ -129,14 +208,20 @@ class _DiffSavedCommand(object):
         if doc is None or not doc.FileName:
             return
         try:
-            old_model = loaders.model_from_file(doc.FileName)
+            old_model, old_shapes = loaders.model_and_shapes_from_file(
+                doc.FileName, want_shapes=True)
         except Exception as exc:  # noqa: BLE001
             _status("Model Context: could not read saved file (%s)" % exc)
             return
         new_model = S.serialize_document(doc)
         new_model["document"]["label"] = "current (unsaved)"
+        new_shapes = loaders.shapes_from_document(doc)
         d = D.diff_models(old_model, new_model)
-        _show_diff_dialog("Model diff: saved vs current", D.diff_to_text(d))
+        base = os.path.splitext(doc.FileName)[0] + ".diff.html"
+        _show_diff_dialog(
+            "Model diff: saved vs current", d,
+            on_export_html=lambda: _export_html_report(
+                d, old_model, old_shapes, new_model, new_shapes, base))
 
 
 class _DiffFilesCommand(object):
@@ -160,14 +245,17 @@ class _DiffFilesCommand(object):
         if not b:
             return
         try:
-            old_model = loaders.model_from_file(a)
-            new_model = loaders.model_from_file(b)
+            old_model, old_shapes = loaders.model_and_shapes_from_file(a, want_shapes=True)
+            new_model, new_shapes = loaders.model_and_shapes_from_file(b, want_shapes=True)
         except Exception as exc:  # noqa: BLE001
             _status("Model Context: diff failed (%s)" % exc)
             return
         d = D.diff_models(old_model, new_model)
-        _show_diff_dialog("Model diff: %s -> %s" % (
-            os.path.basename(a), os.path.basename(b)), D.diff_to_text(d))
+        base = os.path.splitext(b)[0] + ".diff.html"
+        _show_diff_dialog(
+            "Model diff: %s -> %s" % (os.path.basename(a), os.path.basename(b)),
+            d, on_export_html=lambda: _export_html_report(
+                d, old_model, old_shapes, new_model, new_shapes, base))
 
 
 def register():
