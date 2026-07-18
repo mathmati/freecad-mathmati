@@ -80,6 +80,12 @@ defaults are omitted so the context stays semantic, not a property dump.
 
 ## Diff: what changed between two versions
 
+Note: the diff has grown into its own add-on,
+[freecad-diff](https://github.com/mathmati/freecad-diff), with visual
+overlays, an HTML report, CSV output and a volumetric material diff. Use
+that for diffing; the built-in diff below stays for library users of this
+schema.
+
 Because both sides serialize to the same schema, diffing two versions of a
 document is plain data comparison. The output reads like a semantic git
 diff:
