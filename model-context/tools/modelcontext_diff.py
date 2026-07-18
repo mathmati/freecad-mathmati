@@ -26,6 +26,8 @@ Environment options (all optional):
     MC_DIFF_SUMMARY  set (non-empty) -> object heads only, no detail rows
     MC_DIFF_PALETTE  default | okabe-ito        (svg/html visuals)
     MC_DIFF_VIEWS    comma list of iso,front,top,right   (svg/html)
+    MC_DIFF_CALLOUTS set (non-empty) -> number each change with a revision
+                     cloud on the overlay (svg/html; off by default)
     MC_DIFF_OUTPUT   path to write to instead of stdout
 
 The same options are also accepted as ``--pass``-forwarded flags
@@ -86,6 +88,7 @@ def _parse_opts(argv):
             "summary": _flag("MC_DIFF_SUMMARY"),
             "palette": env("MC_DIFF_PALETTE", "default"),
             "views": tuple((env("MC_DIFF_VIEWS") or "iso,front,top").split(",")),
+            "callouts": _flag("MC_DIFF_CALLOUTS"),
             "output": env("MC_DIFF_OUTPUT")}
     pos = []
     i = 0
@@ -105,6 +108,8 @@ def _parse_opts(argv):
             opts["summary"] = True; i += 1; continue
         if a in ("--all", "--full"):
             opts["summary"] = False; i += 1; continue
+        if a == "--callouts":
+            opts["callouts"] = True; i += 1; continue
         if a == "--palette" and i + 1 < len(argv):
             opts["palette"] = argv[i + 1]; i += 2; continue
         if a.startswith("--palette="):
@@ -224,6 +229,7 @@ def _render(D, d, opts, old_model, old_shapes, new_model, new_shapes):
         return V.build_overlay_svg(d, old_model, old_shapes or {},
                                    new_model, new_shapes or {},
                                    direction=view, palette=opts["palette"],
+                                   callouts=opts.get("callouts", False),
                                    title="%s -> %s" % (
                                        old_model["document"]["label"],
                                        new_model["document"]["label"]))
@@ -234,7 +240,8 @@ def _render(D, d, opts, old_model, old_shapes, new_model, new_shapes):
         from freecad.ModelContextWB import htmlreport as H
     overlays = V.build_overlays(d, old_model, old_shapes or {},
                                 new_model, new_shapes or {},
-                                views=opts["views"], palette=opts["palette"])
+                                views=opts["views"], palette=opts["palette"],
+                                callouts=opts.get("callouts", False))
     return H.diff_to_html(d, overlays=overlays)
 
 

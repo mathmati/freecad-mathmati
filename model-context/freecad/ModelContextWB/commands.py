@@ -140,10 +140,17 @@ def _show_diff_dialog(title, diff, on_export_html=None):
     view.setHtml(_diff_to_qt_html(diff))
     lay.addWidget(view)
     row = QtWidgets.QHBoxLayout()
+    callout_cb = None
+    if on_export_html is not None:
+        callout_cb = QtWidgets.QCheckBox("Number changes (revision clouds)", dlg)
+        callout_cb.setToolTip("Circle and number each added/removed/changed "
+                              "object on the visual overlay in the HTML report.")
+        row.addWidget(callout_cb)
     row.addStretch(1)
     if on_export_html is not None:
         html_btn = QtWidgets.QPushButton("Export HTML Report...", dlg)
-        html_btn.clicked.connect(on_export_html)
+        html_btn.clicked.connect(
+            lambda: on_export_html(callout_cb.isChecked()))
         row.addWidget(html_btn)
     copy_btn = QtWidgets.QPushButton("Copy Text", dlg)
     close_btn = QtWidgets.QPushButton("Close", dlg)
@@ -157,7 +164,7 @@ def _show_diff_dialog(title, diff, on_export_html=None):
 
 
 def _export_html_report(diff, old_model, old_shapes, new_model, new_shapes,
-                        default_name):
+                        default_name, callouts=False):
     """Save-dialog -> write the self-contained HTML report (with visual
     overlay) -> open it in the user's browser."""
     from . import htmlreport as H
@@ -174,7 +181,8 @@ def _export_html_report(diff, old_model, old_shapes, new_model, new_shapes,
         overlays = {}
         if old_shapes is not None and new_shapes is not None:
             overlays = V.build_overlays(diff, old_model, old_shapes,
-                                        new_model, new_shapes)
+                                        new_model, new_shapes,
+                                        callouts=callouts)
         html = H.diff_to_html(diff, overlays=overlays)
         # the report contains non-ASCII glyphs (arrows, minus sign); write
         # UTF-8 explicitly so it does not crash on a non-UTF-8 locale
@@ -220,8 +228,9 @@ class _DiffSavedCommand(object):
         base = os.path.splitext(doc.FileName)[0] + ".diff.html"
         _show_diff_dialog(
             "Model diff: saved vs current", d,
-            on_export_html=lambda: _export_html_report(
-                d, old_model, old_shapes, new_model, new_shapes, base))
+            on_export_html=lambda co: _export_html_report(
+                d, old_model, old_shapes, new_model, new_shapes, base,
+                callouts=co))
 
 
 class _DiffFilesCommand(object):
@@ -254,8 +263,9 @@ class _DiffFilesCommand(object):
         base = os.path.splitext(b)[0] + ".diff.html"
         _show_diff_dialog(
             "Model diff: %s -> %s" % (os.path.basename(a), os.path.basename(b)),
-            d, on_export_html=lambda: _export_html_report(
-                d, old_model, old_shapes, new_model, new_shapes, base))
+            d, on_export_html=lambda co: _export_html_report(
+                d, old_model, old_shapes, new_model, new_shapes, base,
+                callouts=co))
 
 
 def register():

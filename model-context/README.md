@@ -109,7 +109,9 @@ review:
   one image: **added** solid green, **removed** dashed red, **changed** shows
   the old silhouette ghosted grey under the new one in solid blue. Color is
   never the only channel (line style carries the same information), and
-  `MC_DIFF_PALETTE=okabe-ito` selects a colorblind-safe palette.
+  `MC_DIFF_PALETTE=okabe-ito` selects a colorblind-safe palette. Off by
+  default but available: `MC_DIFF_CALLOUTS=1` circles and numbers each change
+  with a revision cloud (the drafting convention for marking a revised region).
 - **`html`** — a single self-contained file (no external assets, no build
   step): a sticky header with count chips, the visual overlay with
   iso/front/top view tabs, and a collapsible `old → new` row per object.

@@ -166,14 +166,53 @@ def _bbox_of(svg_body):
             pass
 
 
+def _revision_cloud(x, y, w, h, color, scallop=7.0):
+    """SVG path of a revision cloud (scalloped rectangle) around the given
+    screen-space box, stroked in ``color``. Each side is a run of outward
+    semicircular arcs -- the drafting convention for circling a revision."""
+    import math
+    corners = [(x, y), (x + w, y), (x + w, y + h), (x, y + h)]
+    d = ["M %.2f %.2f" % corners[0]]
+    for i in range(4):
+        x0, y0 = corners[i]
+        x1, y1 = corners[(i + 1) % 4]
+        seg = math.hypot(x1 - x0, y1 - y0)
+        n = max(1, int(round(seg / (2.0 * scallop))))
+        r = seg / (2.0 * n)  # exact semicircle radius for this side
+        for k in range(1, n + 1):
+            px = x0 + (x1 - x0) * k / n
+            py = y0 + (y1 - y0) * k / n
+            # sweep-flag 1 bulges outward for a clockwise perimeter (y-down)
+            d.append("A %.2f %.2f 0 0 1 %.2f %.2f" % (r, r, px, py))
+    d.append("Z")
+    return ('<path d="%s" fill="none" stroke="%s" stroke-width="1.4" '
+            'stroke-opacity="0.9"/>' % (" ".join(d), color))
+
+
+def _number_badge(x, y, n, color):
+    """A small filled circle badge carrying the revision number, placed at a
+    box corner (white digit on the status color for contrast)."""
+    r = 10
+    return ('<g><circle cx="%.1f" cy="%.1f" r="%d" fill="%s" '
+            'stroke="white" stroke-width="1.5"/>'
+            '<text x="%.1f" y="%.1f" font-family="sans-serif" font-size="12" '
+            'font-weight="bold" fill="white" text-anchor="middle">%d</text></g>'
+            % (x, y, r, color, x, y + 4, n))
+
+
 def build_overlay_svg(diff, old_model, old_shapes, new_model, new_shapes,
                       direction="iso", width=760, height=560,
-                      palette=None, title=None, legend=True):
+                      palette=None, title=None, legend=True, callouts=False):
     """Compose the styled overlay SVG (returned as a string).
 
     ``old_shapes``/``new_shapes``: {object_id: Part.Shape} (see
     ``loaders.model_and_shapes_from_file`` / ``shapes_from_document``).
     ``direction``: a VIEWS key or an (x, y, z) tuple.
+    ``callouts``: when True, draw a numbered revision cloud around every
+    added/removed/changed object (the drafting convention for marking a
+    revised region). Off by default -- the color+line-style channel already
+    distinguishes states, and clouds add ink; opt in when a reviewer wants
+    each change explicitly circled and numbered.
     """
     if isinstance(palette, str):
         palette = PALETTES.get(palette, PALETTE)
@@ -185,18 +224,29 @@ def build_overlay_svg(diff, old_model, old_shapes, new_model, new_shapes,
     statuses, old_c, new_c = object_statuses(diff, old_model, new_model)
 
     layers = {k: [] for k in DRAW_ORDER}
+    # per-object fragments, so a callout can be anchored to each change's bbox
+    marks = []  # list of (status, oid, [fragment, ...]) for added/removed/changed
     for oid, st in statuses.items():
         if st == "added" and oid in new_shapes:
-            layers["added"].append(_restyle(_project(new_shapes[oid], dir_vec), "added"))
+            frag = _restyle(_project(new_shapes[oid], dir_vec), "added")
+            layers["added"].append(frag)
+            marks.append(("added", oid, [frag]))
         elif st == "removed" and oid in old_shapes:
-            layers["removed"].append(_restyle(_project(old_shapes[oid], dir_vec), "removed"))
+            frag = _restyle(_project(old_shapes[oid], dir_vec), "removed")
+            layers["removed"].append(frag)
+            marks.append(("removed", oid, [frag]))
         elif st == "changed":
+            frags = []
             if oid in old_shapes:
-                layers["changed_old"].append(
-                    _restyle(_project(old_shapes[oid], dir_vec), "changed_old"))
+                f = _restyle(_project(old_shapes[oid], dir_vec), "changed_old")
+                layers["changed_old"].append(f)
+                frags.append(f)
             if oid in new_shapes:
-                layers["changed_new"].append(
-                    _restyle(_project(new_shapes[oid], dir_vec), "changed_new"))
+                f = _restyle(_project(new_shapes[oid], dir_vec), "changed_new")
+                layers["changed_new"].append(f)
+                frags.append(f)
+            if frags:
+                marks.append(("changed", oid, frags))
         elif st == "unchanged" and oid in new_shapes:
             layers["unchanged"].append(_restyle(_project(new_shapes[oid], dir_vec), "unchanged"))
 
@@ -258,6 +308,27 @@ def build_overlay_svg(diff, old_model, old_shapes, new_model, new_shapes,
     out.append('<g transform="translate(%.6g %.6g) scale(%.6g)">' % (tx, ty, scale))
     out.append(body)
     out.append('</g>')
+
+    # numbered revision clouds (opt-in). Anchor each to its object's painted
+    # bbox, mapped from model space into screen space with the same transform.
+    if callouts and marks:
+        anchors = []
+        for st, oid, frags in marks:
+            mb = _bbox_of("\n".join(frags))
+            if mb is None:
+                continue
+            mx, my, mw, mh = mb
+            sx, sy = tx + mx * scale, ty + my * scale
+            sw, sh = mw * scale, mh * scale
+            anchors.append((st, sx, sy, sw, sh))
+        # number top-to-bottom, left-to-right so the sequence reads naturally
+        anchors.sort(key=lambda a: (round(a[2], 1), round(a[1], 1)))
+        for i, (st, sx, sy, sw, sh) in enumerate(anchors, start=1):
+            color = pal[st if st != "changed" else "changed_new"]["stroke"]
+            pad = 7.0
+            out.append(_revision_cloud(sx - pad, sy - pad, sw + 2 * pad,
+                                       sh + 2 * pad, color))
+            out.append(_number_badge(sx - pad, sy - pad, i, color))
     if legend:
         lx = 12
         ly = yoff + height + 22
@@ -278,7 +349,7 @@ def build_overlay_svg(diff, old_model, old_shapes, new_model, new_shapes,
 
 def build_overlays(diff, old_model, old_shapes, new_model, new_shapes,
                    views=("iso", "front", "top"), palette=None,
-                   width=760, height=560, legend=True):
+                   width=760, height=560, legend=True, callouts=False):
     """Build one overlay SVG per named view. Returns an ordered
     ``{view_name: svg_string}`` dict (skipping any view that fails to
     project). Convenience wrapper over :func:`build_overlay_svg` for the
@@ -289,7 +360,7 @@ def build_overlays(diff, old_model, old_shapes, new_model, new_shapes,
             out[v] = build_overlay_svg(
                 diff, old_model, old_shapes, new_model, new_shapes,
                 direction=v, width=width, height=height, palette=palette,
-                title=None, legend=legend)
+                title=None, legend=legend, callouts=callouts)
         except Exception as exc:  # noqa: BLE001
             # a failed projection drops just that view; make the omission
             # diagnosable rather than silently shipping a viz-less report
