@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>ModelContext</name>
+  <description>Serialize a FreeCAD document's semantic model -- the feature tree, each feature's parameters (with expressions), the Sketcher geometry WITH its constraint graph, and materials -- into a canonical, versioned, tool-agnostic JSON schema (plus an LLM-legible Markdown rendering). Grounding context for LLM / agent / MCP tools: a published schema (see SCHEMA.md) anyone can adopt, rather than the ad-hoc per-tool dumps each FreeCAD AI/MCP integration reinvents. Importable library + an "Export Model Context" GUI command.</description>
+  <version>0.3.0</version>
+  <date>2026-07-18</date>
+  <maintainer email="177616452+mathmati@users.noreply.github.com">mathmati</maintainer>
+  <license file="LICENSE-Code">MIT</license>
+  <url type="repository" branch="main">https://github.com/mathmati/FreeCAD-ModelContext</url>
+  <url type="readme">https://github.com/mathmati/FreeCAD-ModelContext/raw/main/README.md</url>
+  <url type="bugtracker">https://github.com/mathmati/FreeCAD-ModelContext/issues</url>
+  <icon>Resources/Icons/modelcontext.svg</icon>
+  <freecadmin>1.1.0</freecadmin>
+  <pythonmin>3.9</pythonmin>
+  <content>
+    <workbench>
+      <classname>ModelContextWorkbench</classname>
+      <icon>Resources/Icons/modelcontext.svg</icon>
+    </workbench>
+  </content>
+  <tag>ai</tag>
+  <tag>llm</tag>
+  <tag>mcp</tag>
+  <tag>serialization</tag>
+  <tag>schema</tag>
+  <tag>interoperability</tag>
+</package>

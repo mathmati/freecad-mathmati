@@ -11,7 +11,7 @@ Screenshot (FreeCAD 1.1.0, genuinely clean-install re-verify, 2026-07-10,
 after the pre-release prior-art pass removed 7 duplicate cards — tree
 shows 21/21):
 
-![Material Editor showing the populated Standards Library, 21 cards, "17-4PH Stainless Steel (H900)" selected](../shots/m3_clean_install_material_editor.png)
+![Material Editor showing the populated Standards Library, 21 cards, "17-4PH Stainless Steel (H900)" selected](docs/screenshots/m3_clean_install_material_editor.png)
 
 ## What this is
 
@@ -148,8 +148,7 @@ On every FreeCAD GUI startup, it copies its own bundled
 `Resources/Materials/**/*.FCMat` files into FreeCAD's real, writable User
 material library (there is no manifest or path-registration API for
 third-party material libraries as of FreeCAD 1.1.0 — copying into the
-one writable "User" library directory is the only supported mechanism;
-see `../FORMAT.md` for the primary-source verification of this). It also
+one writable "User" library directory is the only supported mechanism). It also
 merges its own (currently empty — see Scope below) bundled
 `Resources/Profiles/profiles.csv` rows into FreeCAD's real, writable user
 BIM `profiles.csv`, in a clearly delimited, idempotent managed block that
@@ -158,7 +157,7 @@ never touches anything else already in that shared file. See
 "Re-sync standards data" command is also available under the "Standards
 Library" workbench/toolbar.
 
-## Verifying it worked (clean-install test, this session)
+## Verifying it worked (clean-install test)
 
 A fresh copy of this addon (no symlink) was installed into an empty
 `Mod/` directory, FreeCAD 1.1.0 was launched under Xvfb from a clean
@@ -170,14 +169,12 @@ state (no pre-existing synced data), and:
   duplicate cards were removed.
 - A headless enumeration (`Materials.MaterialManager`, run once per
   material to work around a real FreeCAD 1.1.0 Materials-module crash
-  found this session — see `../verify/m3_single_material_check.py`'s
-  docstring) confirmed all 21 cards resolve by UUID, expose both
+  found during verification) confirmed all 21 cards resolve by UUID, expose both
   `LinearElastic` and `MaterialStandard`, and have sane-range Density /
   YoungsModulus / PoissonRatio and a non-empty StandardCode.
 - The Report View showed no parse errors or warnings.
 
-See `../verify/` for the full scripted harness and `../shots/` for
-screenshots.
+The verification above is fully scripted and re-runnable against a real FreeCAD 1.1 install.
 
 ## Data provenance and accuracy methodology
 
@@ -201,8 +198,7 @@ above):
    has no true yield point).
 
 Full material × property × source × agreement table:
-[`../DATA_PROVENANCE.md`](../DATA_PROVENANCE.md). Sourcing/licensing
-landscape: [`../SOURCES.md`](../SOURCES.md). Nothing here is copied
+[`DATA_PROVENANCE.md`](DATA_PROVENANCE.md). Nothing here is copied
 prose or a scraped database row — every value is a re-expressed
 standard/grade nominal property, cross-checked, not bulk-copied from any
 single encumbered source (see `SOURCES.md` for the licensing reasoning).
@@ -211,11 +207,9 @@ single encumbered source (see `SOURCES.md` for the licensing reasoning).
 
 **Materials only.** The BIM/Arch structural-profile sync mechanism (HSS
 sections, UK Blue Book, etc.) and thread/fastener data were proven
-end-to-end at the mechanism level in an earlier milestone (see
-`../FORMAT.md` §2, §3) but are **not yet populated with real data** —
+end-to-end at the mechanism level in an earlier milestone but are **not yet populated with real data** —
 `Resources/Profiles/profiles.csv` ships empty in this release. Filling
-that gap, and the CAM machinability/chipload data gap noted in
-`../SOURCES.md`, are future work, not silently dropped scope.
+that gap, and the CAM machinability/chipload data gap, are future work, not silently dropped scope.
 
 ## Privacy / compliance
 
@@ -227,12 +221,7 @@ above) — no telemetry, no external calls, nothing sent anywhere.
 
 ## License
 
-Code: MIT (`LICENSE-Code`). Data: each `.FCMat` card carries its own
-`General.License` field (currently `CC-BY-4.0` for every card added by
-this addon) plus a matching `# SPDX-License-Identifier:` header comment,
-per FreeCAD's Qualities-checklist guidance on consistent license
-declaration. See [`../SOURCES.md`](../SOURCES.md) for per-source
-licensing notes.
+**Code:** MIT (`LICENSE`). **Material data:** Creative Commons Attribution 4.0 (CC BY 4.0) — see [`LICENSE-Data`](LICENSE-Data); each `.FCMat` card also carries its own `# SPDX-License-Identifier: CC-BY-4.0` header and `General.License` field. Provenance: [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md).
 
 ## Known limitations / roadmap
 
@@ -261,8 +250,7 @@ on those PRs being accepted.
 
 ## Contributing
 
-Issues and pull requests are welcome once this repository is public (see
-`../RELEASE_CHECKLIST.md` for what's still pending before that). Please
+Issues and pull requests are welcome. Please
 cross-check any new/changed material property against **at least two
 independent sources** and record the citation, matching this project's
 own practice, and disclose any AI assistance in your PR description with

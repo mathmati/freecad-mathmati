@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freecad-modelcontext"
+version = "0.1.0"
+description = "Canonical, versioned serialization of a FreeCAD document's semantic model for AI tools."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["freecad*"]

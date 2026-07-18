@@ -9,20 +9,22 @@ Manager.
 
 | Add-on | What it does |
 |--------|--------------|
-| **[migration-guide](migration-guide/)** | *Learn it.* Two dockable panels for people arriving from Fusion 360 / SolidWorks: a searchable concept-map (Part-container vs PartDesign Body, terminology bridges, an honest toponaming note) and an interactive 7-step guided "first real part" tour that validates against the live document. |
-| **[standards-library](standards-library/)** | *Equip it.* 21 cross-checked engineering material cards (steels, stainless, aluminium, titanium, copper alloys, cast irons, polymers, magnesium — including AZ31B, not otherwise present in core or the official supplemental materials). Every property is cross-checked against at least two public sources. |
-| **[site-context](site-context/)** | *Build in the real world.* A SketchUp-style "Add Location": place-search or coordinates → OpenStreetMap buildings (with courtyards) extruded at real heights on SRTM terrain. An actively-maintained, FreeCAD-1.x-verified evolution of the earlier GeoData / GeoData2 add-ons, which it credits. |
-| **[push-pull](push-pull/)** | *Model it easily.* SketchUp-style direct modelling: click a face, drag along its normal with a live ghost preview and numeric readout, release to commit a **parametric** PartDesign Pad/Pocket. Type a number for precision. |
+| **[migration-guide](migration-guide/)** | A searchable concept map and a guided first-part tour for people coming from Fusion 360 or SolidWorks. |
+| **[standards-library](standards-library/)** | 21 engineering material cards (steels, stainless, aluminium, titanium, copper alloys, cast iron, magnesium). Every value cross-checked against at least two public sources. |
+| **[site-context](site-context/)** | Pick a place, get a 3D site model: OpenStreetMap buildings on real terrain, georeferenced. Like SketchUp's Add Location, on open data. |
+| **[push-pull](push-pull/)** | Click a face and drag to extrude or cut it, SketchUp style. Commits a normal parametric Pad or Pocket. Type a number for an exact distance. |
+| **[sketch-layer](sketch-layer/)** | Draw lines and rectangles in the 3D view with SketchUp-style colored snapping cues and type-to-dimension. Closed shapes become faces you can push/pull. |
+| **[ai-render](ai-render/)** | Render the 3D view with an AI image model, using your own ComfyUI, Stability AI or OpenAI account. A line-art control image keeps the result true to your geometry. |
+| **[model-context](model-context/)** | Exports a document's feature tree, parameters and sketch constraints as JSON or Markdown, so AI tools can read the model instead of guessing from screenshots. |
+| **[freecad-diff](freecad-diff/)** | Shows what changed between two versions of a document: which dimension moved, which feature was added, plus a visual overlay of both shapes. Works from the GUI, the command line, and `git diff`. Early, feedback welcome. Also at [mathmati/freecad-diff](https://github.com/mathmati/freecad-diff). |
 
 ## Notes
 
-- **Prior work is credited, not claimed.** Where similar work exists it is named
+- Prior work is credited, not claimed. Where similar work exists it is named
   in the relevant add-on's README (site-context credits the GeoData lineage;
-  standards-library removed material cards that duplicated FreeCAD core before
-  release, and lists which cards are genuinely new vs. equivalents).
-- **Data licensing:** site-context uses OpenStreetMap data (© OpenStreetMap
-  contributors, ODbL) and open elevation data; attribution is embedded in
-  generated documents. standards-library material data is CC-BY-4.0.
+  standards-library lists which cards are new and which duplicate core).
+- site-context uses OpenStreetMap data (© OpenStreetMap contributors, ODbL)
+  and open elevation data; attribution is embedded in generated documents.
 
 ## Licence
 

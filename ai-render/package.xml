@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>AIRender</name>
+  <description>Render the FreeCAD 3D view with an AI image model. Captures a color image plus a line-art control image and sends both to your own ComfyUI, Stability AI or OpenAI account. Results are saved next to the document.</description>
+  <version>0.1.0</version>
+  <date>2026-07-10</date>
+  <maintainer email="177616452+mathmati@users.noreply.github.com">mathmati</maintainer>
+  <license file="LICENSE">MIT</license>
+  <url type="repository" branch="main">https://github.com/mathmati/FreeCAD-AIRender</url>
+  <url type="readme">https://github.com/mathmati/FreeCAD-AIRender/raw/main/README.md</url>
+  <url type="bugtracker">https://github.com/mathmati/FreeCAD-AIRender/issues</url>
+  <icon>Resources/Icons/airender.svg</icon>
+  <freecadmin>1.1.0</freecadmin>
+  <pythonmin>3.9</pythonmin>
+  <content>
+    <workbench>
+      <classname>AIRenderWorkbench</classname>
+      <icon>Resources/Icons/airender.svg</icon>
+    </workbench>
+  </content>
+  <tag>rendering</tag>
+  <tag>ai</tag>
+  <tag>image-generation</tag>
+  <tag>stable-diffusion</tag>
+  <tag>comfyui</tag>
+  <tag>visualization</tag>
+</package>

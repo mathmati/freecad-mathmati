@@ -75,6 +75,16 @@ CONCEPT_MAP_ROWS = [
         "parametric feature history -- plan to rebuild history-dependent "
         "edits in FreeCAD from that point forward.",
     ),
+    (
+        "Type a dimension while sketching",
+        "Sketcher On-View-Parameters",
+        "In Fusion 360 / SolidWorks you type a length or coordinate as you "
+        "draw and it becomes a dimension. FreeCAD 1.0's Sketcher gained the "
+        "same thing: On-View-Parameters shows editable value boxes at the "
+        "cursor while you draw, and the numbers you type are applied as "
+        "constraints. If you don't see the cursor-side fields, enable "
+        "On-View-Parameters from the Sketcher toolbar / Sketcher preferences.",
+    ),
 ]
 
 WORKBENCH_QUICKREF = [

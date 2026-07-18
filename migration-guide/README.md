@@ -14,10 +14,7 @@ Screenshots (captured on FreeCAD 1.1.0, Linux):
 
 | Migration Guide panel | Guided Tour panel |
 |---|---|
-| ![Migration Guide panel](../shots/migration_guide_panel_full.png) | ![Guided Tour, step 6 of 7](../shots/tour_panel_progress.png) |
-
-(Full-resolution captures also in [`../shots/`](../shots/): `migration_guide_panel.png`,
-`tour_panel.png`.)
+| ![Migration Guide panel](docs/screenshots/migration_guide_panel_full.png) | ![Guided Tour, step 6 of 7](docs/screenshots/tour_panel_progress.png) |
 
 ## Who this is for
 
@@ -164,7 +161,7 @@ reads or writes FreeCAD's own `Mod/Start` first-run parameters.
 
 ## License
 
-Code is MIT-licensed — see [`LICENSE-Code`](LICENSE-Code). The manifest
+Code is MIT-licensed — see [`LICENSE`](LICENSE). The manifest
 (`package.xml`) declares the same SPDX identifier consistently.
 
 ## Contributing
