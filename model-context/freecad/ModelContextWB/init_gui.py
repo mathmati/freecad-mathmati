@@ -18,7 +18,8 @@ class ModelContextWorkbench(Gui.Workbench):
     def Initialize(self):
         from . import commands
         commands.register()
-        tools = ["ModelContext_Export", "ModelContext_CopyMarkdown"]
+        tools = ["ModelContext_Export", "ModelContext_CopyMarkdown",
+                 "ModelContext_DiffSaved", "ModelContext_DiffFiles"]
         self.appendToolbar("Model Context", tools)
         self.appendMenu("Model Context", tools)
 

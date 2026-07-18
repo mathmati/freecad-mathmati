@@ -315,14 +315,28 @@ def _serialize_object(obj):
     return node
 
 
+def _close_scratch():
+    """Close the hidden defaults-probe document and drop its cached objects
+    (they die with it) so serialization leaves no stray document behind."""
+    global _defaults_cache
+    _defaults_cache = {}
+    try:
+        App.closeDocument(_scratch_doc_name)
+    except Exception:
+        pass
+
+
 def serialize_document(doc):
     """Serialize a FreeCAD document to the canonical model-context dict."""
-    return {
-        "schema": SCHEMA_NAME,
-        "schema_version": SCHEMA_VERSION,
-        "document": {"name": doc.Name, "label": getattr(doc, "Label", doc.Name)},
-        "objects": [_serialize_object(o) for o in doc.Objects],
-    }
+    try:
+        return {
+            "schema": SCHEMA_NAME,
+            "schema_version": SCHEMA_VERSION,
+            "document": {"name": doc.Name, "label": getattr(doc, "Label", doc.Name)},
+            "objects": [_serialize_object(o) for o in doc.Objects],
+        }
+    finally:
+        _close_scratch()
 
 
 # --------------------------------------------------------------------------

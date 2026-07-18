@@ -101,8 +101,9 @@ the sketch's local 2D frame.
 {
   "type": "Coincident",                 // FreeCAD constraint type
   "refs": [ <geo-ref>, <geo-ref> ],     // the elements it relates (used slots only)
-  "value": 20.0,                        // dimensional constraints only
+  "value": 20.0,                        // dimensional constraints only (degrees for Angle)
   "dimensional": true,                  // present+true for dimensional constraints
+  "driving": false,                     // present iff a reference (non-driving) dimension
   "name": "width"                       // present iff the constraint is named
 }
 ```
@@ -143,3 +144,35 @@ properties when available.
   parametric relationships), and is intended to round-trip through JSON
   losslessly. Full geometric *reconstruction* from the schema (rebuilding a
   live document) is a deliberate non-goal of v1.
+
+## Appendix: diff output (`freecad-model-context-diff` v1.0)
+
+`diff.diff_models(old, new)` compares two model-context dicts and returns:
+
+```json
+{
+  "schema": "freecad-model-context-diff",
+  "schema_version": "1.0",
+  "old": { "name": "...", "label": "..." },
+  "new": { "name": "...", "label": "..." },
+  "added":   [ { "id", "label", "type", "role" } ],
+  "removed": [ { "id", "label", "type", "role" } ],
+  "changed": [ { "id", "label", "type", "role", "changes": [ <change> ] } ]
+}
+```
+
+Objects are matched by `id`; datum scaffolding is ignored. Each `<change>`
+has a `kind` and kind-specific fields:
+
+- `param` (`name`, `old`, `new`, optional `old_expression`/`new_expression`),
+  `param_added`, `param_removed`
+- `label`, `type`, `link`, `material` (`old`, `new`)
+- `tree` (body feature order, `old`/`new` lists), `tip`
+- `constraint_added` / `constraint_removed` (`constraint`: rendered text),
+  `constraint_value` (`constraint`, `old`, `new`),
+  `constraint_edited`
+- `geometry_count` (`old`, `new`), `geometry_edited` (`count`)
+
+Constraints are matched by (type, geometry references, user name), so a
+dimensional value edit is a `constraint_value` change rather than a
+remove-plus-add. Values compare with a small numeric tolerance.

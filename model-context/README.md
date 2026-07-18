@@ -76,6 +76,46 @@ values, the expression driving `Length`, and the link to the profile —
 while computed shapes, hidden/internal properties, and values left at their
 defaults are omitted so the context stays semantic, not a property dump.
 
+## Diff: what changed between two versions
+
+Because both sides serialize to the same schema, diffing two versions of a
+document is plain data comparison. The output reads like a semantic git
+diff:
+
+```
+Model diff: bracket_v1.FCStd -> bracket_v2.FCStd
+~ Pad: Length 15 mm -> 20 mm
++ Pocket (PartDesign::Pocket) added
+- Sketch: constraint DistanceX: g0.start, g0.end = 20
+~ Body: tip Pad -> Pocket
+```
+
+Three ways to use it:
+
+- **In the GUI:** the Model Context workbench has **Diff Against Saved**
+  (what changed since the last save) and **Diff Two Files**.
+- **From the command line** (exit code 0 = no changes, 1 = differences):
+
+  ```
+  MC_DIFF_OLD=v1.FCStd MC_DIFF_NEW=v2.FCStd freecadcmd tools/modelcontext_diff.py
+  ```
+
+- **From git**, so `git diff` shows semantic changes for `.FCStd` files:
+
+  ```
+  git config diff.fcstd.command "freecadcmd /path/to/tools/modelcontext_diff.py"
+  echo "*.FCStd diff=fcstd" >> .gitattributes
+  ```
+
+As a library: `diff.diff_models(old, new)` returns a structured dict (see
+the appendix in `SCHEMA.md`), with `diff_to_text` and `diff_to_markdown`
+renderers.
+
+Honest limits: sketch geometry is compared by position (GeoId), so
+inserting an element mid-list reads as several edited elements, and
+constraints that reference shifted geometry indices read as removed plus
+added.
+
 ## Scope (v1)
 
 - **Read-only context.** Captures enough to *describe and reason about* the
@@ -97,10 +137,18 @@ by a spreadsheet expression), serializes it, and asserts the schema faithfully
 captures the feature tree, the sketch constraint graph (constraint types +
 geometry references + named point roles), dimensional values, the expression,
 the support plane, that datum scaffolding stays minimal, and that the result
-round-trips as JSON. A GUI check confirms the workbench and both commands
-auto-register with zero Report-View errors.
+round-trips as JSON. A second regression covers the diff: identical models
+diff to empty; a Length change (15 to 20 mm), an added feature, a removed
+constraint, a renamed label, an expression change, and a dimensional-value
+edit are each detected and rendered; the CLI tool is exercised end-to-end on
+two saved files with its exit-code contract. A GUI check confirms the
+workbench and all four commands auto-register with zero Report-View errors.
 
 ## License
 
 Code is MIT (see `LICENSE` and the SPDX headers). The schema in
 `SCHEMA.md` is free to implement/adopt.
+
+## Transparency
+
+Built with [Claude Code](https://claude.com/claude-code).

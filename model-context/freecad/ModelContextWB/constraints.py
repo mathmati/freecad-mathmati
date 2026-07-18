@@ -89,8 +89,11 @@ def _xy(v):
 def serialize_constraint(c):
     """Serialize one Sketcher.Constraint into a self-describing dict:
     ``type`` (Coincident/Horizontal/Distance/...), the geometry references
-    it relates (only the used slots), an optional dimensional ``value``, and
-    the user ``name`` if the constraint was named."""
+    it relates (only the used slots), an optional dimensional ``value``
+    (degrees for Angle constraints; FreeCAD stores radians internally), the
+    user ``name`` if the constraint was named, and ``driving: false`` for
+    reference (non-driving) dimensions."""
+    import math
     out = {"type": c.Type}
     refs = []
     for gid, pos in ((c.First, c.FirstPos), (c.Second, c.SecondPos), (c.Third, c.ThirdPos)):
@@ -102,8 +105,13 @@ def serialize_constraint(c):
     # Dimensional constraints carry a value; flag which are driving vs. the
     # geometric ones (value stays 0 and is meaningless for those).
     if c.Type in _DIMENSIONAL:
-        out["value"] = round(c.Value, 6)
+        value = c.Value
+        if c.Type == "Angle":
+            value = math.degrees(value)
+        out["value"] = round(value, 6)
         out["dimensional"] = True
+    if getattr(c, "Driving", True) is False:
+        out["driving"] = False
     if getattr(c, "Name", ""):
         out["name"] = c.Name
     return out
